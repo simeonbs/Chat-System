@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ChatSystem.Models
 {
+    /// <summary>
+    /// Participant model.
+    /// </summary>
     public class Participant
     {
         /// <summary>

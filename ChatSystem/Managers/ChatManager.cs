@@ -7,10 +7,26 @@ using System.Text.Json;
 
 namespace ChatSystem.Managers
 {
+    /// <summary>
+    /// Chat manager.
+    /// </summary>
+    /// <seealso cref="ChatSystem.Managers.Interfaces.IChatManager" />
     public class ChatManager : IChatManager
     {
+        /// <summary>
+        /// The database context
+        /// </summary>
         private readonly ChatSystemDbContext _dbContext;
+        /// <summary>
+        /// The cache
+        /// </summary>
         private readonly IMemoryCache _cache;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ChatManager"/> class.
+        /// </summary>
+        /// <param name="dbContext">The database context.</param>
+        /// <param name="cache">The cache.</param>
         public ChatManager(ChatSystemDbContext dbContext, IMemoryCache cache)
         {
             _dbContext = dbContext;
@@ -66,6 +82,11 @@ namespace ChatSystem.Managers
             return string.Empty;
         }
 
+        /// <summary>
+        /// Ends the chat asynchronous.
+        /// </summary>
+        /// <param name="conversationId">The conversation identifier.</param>
+        /// <exception cref="System.Exception">Conversation not found.</exception>
         public async Task EndChat(Guid conversationId)
         {
             var conversation = _dbContext.Conversations.Find(conversationId);
@@ -89,6 +110,12 @@ namespace ChatSystem.Managers
         public bool FindConversation(Guid conversationId) => _dbContext.Conversations.Any(c => c.Id == conversationId 
                                                                                             && c.EndTime == null);
 
+        /// <summary>
+        /// Gets the conversation.
+        /// </summary>
+        /// <param name="conversationId">The conversation identifier.</param>
+        /// <returns></returns>
+        /// <exception cref="System.Exception">Conversation not found.</exception>
         public string GetConversation([FromQuery] Guid conversationId)
         {
             if (!_cache.TryGetValue($"Conversation:{conversationId}", out Conversation conversation))

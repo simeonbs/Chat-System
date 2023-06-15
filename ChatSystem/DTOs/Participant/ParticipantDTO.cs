@@ -1,5 +1,8 @@
 ﻿namespace ChatSystem.DTOs.Participant
 {
+    /// <summary>
+    /// The participant DTO.
+    /// </summary>
     public class ParticipantDTO
     {
         /// <summary>

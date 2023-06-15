@@ -8,6 +8,10 @@ using System.Text.Json;
 
 namespace ChatSystem.Controllers
 {
+    /// <summary>
+    /// Chat controller.
+    /// </summary>
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [ApiController]
     [Route("api/chat/")]
     public class ChatController : Controller
